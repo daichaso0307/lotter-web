@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.http.ResponseEntity;
 
-import static com.lottery.lotteryweb.commons.constants.Shared.SUCCESS_STATUS;
+import static com.lottery.lotteryweb.common.constants.Shared.SUCCESS_STATUS;
 
 @Data
 @AllArgsConstructor

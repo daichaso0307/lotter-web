@@ -3,7 +3,6 @@ package com.lottery.lotteryweb.controllers.result;
 import com.lottery.lotteryweb.requestes.result.GetResultListRequest;
 import com.lottery.lotteryweb.requestes.result.GetResultRequest;
 import com.lottery.lotteryweb.responses.common.AppApiResponse;
-import com.lottery.lotteryweb.responses.result.ResultListResponse;
 import com.lottery.lotteryweb.responses.result.ResultResponse;
 import com.lottery.lotteryweb.services.result.IResultService;
 import io.swagger.annotations.ApiOperation;
@@ -20,8 +19,8 @@ import javax.validation.constraints.NotNull;
 
 import java.util.List;
 
-import static com.lottery.lotteryweb.commons.constants.HttpStatusValue.*;
-import static com.lottery.lotteryweb.commons.constants.HttpStatusValue.SERVER_ERROR;
+import static com.lottery.lotteryweb.common.constants.HttpStatusValue.*;
+import static com.lottery.lotteryweb.common.constants.HttpStatusValue.SERVER_ERROR;
 
 @RestController
 @RequestMapping("/api/result")

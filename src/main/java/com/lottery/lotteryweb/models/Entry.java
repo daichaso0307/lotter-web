@@ -20,20 +20,23 @@ public class Entry extends Auditable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id", nullable = false, columnDefinition = "BIGINT(20)")
-    private Long yearId;
+    @ManyToOne
+    @JoinColumn(name = "year_id", referencedColumnName = "id")
+    private Year year;
 
     @Column(name = "person", nullable = false, columnDefinition = "INT(1)")
     private Integer person;
 
-    @Column(name = "user_id", nullable = false, columnDefinition = "BIGINT(20)")
-    private Long gameId;
+    @ManyToOne
+    @JoinColumn(name = "game_id", referencedColumnName = "id")
+    private Game game;
 
     @Column(name = "user_id", nullable = false, columnDefinition = "BIGINT(20)")
     private String passId;
 
-    @Column(name = "user_id", nullable = false, columnDefinition = "BIGINT(20)")
-    private Long gateId;
+    @ManyToOne
+    @JoinColumn(name = "gate_id", referencedColumnName = "id")
+    private Gate gate;
 
     @Column(name = "user_name", nullable = false, columnDefinition = "VARCHAR(20)")
     private String userName;
@@ -45,17 +48,17 @@ public class Entry extends Auditable {
     private String email;
 
     public Entry(
-            long yearId,
-            long gameId,
-            long gateId,
+            Year year,
+            Game game,
+            Gate gate,
             String passId,
             String userName,
             String userKana,
             int person,
             String email) {
-        this.yearId = yearId;
-        this.gameId = gameId;
-        this.gateId = gateId;
+        this.year = year;
+        this.game = game;
+        this.gate = gate;
         this.passId = passId;
         this.userName = userName;
         this.userKana = userKana;

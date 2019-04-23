@@ -1,11 +1,11 @@
 package com.lottery.lotteryweb.services.entry;
 
-import com.lottery.lotteryweb.models.Entry;
-import com.lottery.lotteryweb.models.User;
-import com.lottery.lotteryweb.repositories.EntryRepository;
-import com.lottery.lotteryweb.repositories.UserRepository;
+import com.lottery.lotteryweb.models.*;
+import com.lottery.lotteryweb.repositories.*;
 import com.lottery.lotteryweb.requestes.entry.CreateEntryRequest;
+import com.lottery.lotteryweb.requestes.entry.GetEntryRequest;
 import com.lottery.lotteryweb.responses.common.AppApiResponse;
+import com.lottery.lotteryweb.responses.entry.EntryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -17,6 +17,9 @@ public class EntryService implements IEntryService {
 
     @Autowired UserRepository userRepository;
     @Autowired EntryRepository entryRepository;
+    @Autowired YearRepository yearRepository;
+    @Autowired GameRepository gameRepository;
+    @Autowired GateRepository gateRepository;
 
     @Override
     public ResponseEntity<AppApiResponse> createEntry(CreateEntryRequest createEntryRequest) {
@@ -47,10 +50,16 @@ public class EntryService implements IEntryService {
             // TODO エラー返す
         }
 
+        Year year = yearRepository.findByValueAndDeleteFlag(yearId, Boolean.FALSE);
+
+        Game game = gameRepository.findByIdAndDeleteFlag(gameId, Boolean.FALSE);
+
+        Gate gate = gateRepository.findByIdAndDeleteFlag(gateId, Boolean.FALSE);
+
         Entry entry = new Entry(
-                yearId,
-                gameId,
-                gateId,
+                year,
+                game,
+                gate,
                 passId,
                 userName,
                 userKana,
@@ -62,5 +71,25 @@ public class EntryService implements IEntryService {
         //申し込み完了メールを送信する。
 
         return new AppApiResponse().success();
+    }
+
+    @Override
+    public EntryResponse getEntry(GetEntryRequest getEntryRequest) {
+        EntryResponse response = new EntryResponse();
+
+        String passId = getEntryRequest.getPassId();
+        String email = getEntryRequest.getEmail();
+
+        Entry entry = entryRepository.findByPassIdAndEmailAndDeleteFlag(passId, email, Boolean.FALSE);
+
+        response.setYear(entry.getYear().getValue());
+        response.setGateName(entry.getGate().getName());
+        response.setEmail(entry.getEmail());
+        response.setPassId(entry.getPassId());
+        response.setPerson(entry.getPerson());
+        response.setUserName(entry.getUserName());
+        response.setGame(entry.getGame().getValue());
+
+        return response;
     }
 }

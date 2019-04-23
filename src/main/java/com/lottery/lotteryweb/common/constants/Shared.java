@@ -1,4 +1,4 @@
-package com.lottery.lotteryweb.commons.constants;
+package com.lottery.lotteryweb.common.constants;
 
 public class Shared {
 
