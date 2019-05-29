@@ -28,6 +28,11 @@ public class ResultController {
 
     @Autowired IResultService resultService;
 
+    /**
+     * 抽選結果取得API
+     * @param getResultRequest
+     * @return
+     */
     @GetMapping()
     @ApiOperation("")
     @ApiResponses(value = {
@@ -43,6 +48,11 @@ public class ResultController {
         return resultService.getResult(getResultRequest);
     }
 
+    /**
+     * 抽選結果一覧取得API
+     * @param getResultListRequest
+     * @return
+     */
     @GetMapping("/list")
     @ApiOperation("")
     @ApiResponses(value = {

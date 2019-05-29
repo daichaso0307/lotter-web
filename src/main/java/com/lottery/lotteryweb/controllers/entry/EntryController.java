@@ -29,6 +29,11 @@ public class EntryController {
 
     @Autowired IEntryService entryService;
 
+    /**
+     * 抽選申し込みAPI
+     * @param createEntryRequest
+     * @return
+     */
     @PostMapping()
     @ApiOperation("")
     @ApiResponses(value = {
@@ -44,6 +49,11 @@ public class EntryController {
         return entryService.createEntry(createEntryRequest);
     }
 
+    /**
+     * 抽選申し込み内容確認API
+     * @param getEntryRequest
+     * @return
+     */
     @GetMapping()
     @ApiOperation("")
     @ApiResponses(value = {
